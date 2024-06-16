@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JG</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    <!-- Video de fondo -->
+    <video autoplay muted loop class="video-background">
+        <source src="assets/img/142815-780943566_medium.mp4" type="video/mp4">
+    </video>
+    <header class="cabeza">
+        <!-- Logo -->
+        <img src="assets/img/logo-julian.svg" alt="logo.svg" class="cabeza__logo">
+
+        <!-- Barra de menu -->
+        <label for="menu-bar" class="fa-solid fa-bars cabeza__barra"></label>
+        <input type="checkbox" id="menu-bar" class="cabeza__input">
+        
+        <!-- Menu de navegacion -->
+        <nav class="cabeza__navbar">
+            <ul class="navbar__lista">
+                <li class="lista__opcion"><a href="#sobre-mi" class="opcion__enlace">Sobre mi</a></li>
+                <li class="lista__opcion"><a href="#" class="opcion__enlace">Proyectos</a></li>
+                <li class="lista__opcion"><a href="#" class="opcion__enlace">Habilidades</a></li>
+                <li class="lista__opcion"><a href="#" class="opcion__enlace">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Seccion principal -->
+    <main class="main__content">
+        <section id="sobre-mi" class="seccion__saludo">
+            <h1 class="saludo__titulo">¡Hola!,<br>soy <span class="nombre">Julian</span>,<br>desarrollador web.</h1>
+            <p class="saludo__parrafo">Soy un desarrollador junior apasionado, me dedico a crear experiencias web atractivas y fáciles de usar que aprovechan las últimas tecnologías y las mejores prácticas. Colaboremos juntos para dar vida a tus ideas de desarrollo.</p>
+            
+            <div id="mas-informacion" class="mas__informacion">
+                <p class="saludo__parrafo">Tengo un año de experiencia en diversas areas del desarrollo web y del diseño, estoy constantemente buscando oportunidades para aprender y crecer. Mi objetivo es contribuir a proyectos innovadores que tengan un impacto positivo y continuar desarrollando mis habilidades técnicas.</p>
+            </div>
+            <button id="ver-mas" class="saludo__btn">VER MAS</button>
+        </section>
+    </main>
+<script src="scripts/scripts.js"></script>
+</body>
+</html>
