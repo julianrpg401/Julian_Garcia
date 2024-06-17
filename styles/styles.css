@@ -32,7 +32,7 @@ body{
     left: 0;
     width: 100%;
     height: 100vh;
-    transform: scaleX(-1);
+    /* transform: scaleX(-1); */
     opacity: 50%;
     object-fit: cover;
     z-index: -2;
@@ -46,9 +46,9 @@ body{
     width: 100%;
     height: min-content;
     padding: 1.8rem 6%;
-    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .3);
+    /* box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .3); */
     font-weight: 600;
-    background-color: rgba(0, 0, 0, .3);
+    /* background-color: rgba(0, 0, 0, .3); */
 }
 
 .cabeza__logo{
@@ -78,6 +78,14 @@ body{
 
 .mas__informacion{
     display: none;
+}
+
+.opcion__enlace{
+    transition: .4s;
+}
+
+.opcion__enlace:hover{
+    color: rgb(238, 81, 81);
 }
 
 @media (min-width: 769px){
