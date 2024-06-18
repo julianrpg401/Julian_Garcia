@@ -220,3 +220,7 @@ body{
         background-color: rgb(238, 81, 81);
     }
 }
+
+.video-background{
+    display: none;
+}
