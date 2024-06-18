@@ -88,6 +88,45 @@ body{
     padding: 5rem 6%;
 }
 
+/* Cambios */
+
+.seccion__saludo{
+    display: flex;
+    flex-direction: column;
+}
+
+.saludo__titulo{
+    margin-bottom: 2.5rem;
+    font-family: var(--Montserrat);
+    font-weight: 700;
+}
+
+.nombre{
+    color: var(--Agua-Marina);
+}
+
+.saludo__parrafo{
+    margin-bottom: 3rem;
+    font-family: var(--Poppins);
+    font-weight: 200;
+    word-spacing: .2rem;
+}
+
+.saludo__btn{
+    display: block;
+    width: max-content;
+    padding: 1rem 2.6rem;
+    border: none;
+    border-radius: .5rem;
+    font-family: var(--Montserrat);
+    font-weight: 800;
+    font-size: 1rem;
+    color: white;
+    background-color: var(--Rojo-Salmon);
+}
+
+/* Fin de cambios */
+
 @media (min-width: 769px){
 
     .cabeza{
@@ -182,45 +221,16 @@ body{
     /* Seccion principal */
 
     .seccion__saludo{
-        display: flex;
-        flex-direction: column;
         align-items: center;
         text-align: center;
     }
 
     .saludo__titulo{
-        margin-bottom: 2.5rem;
-        font-family: var(--Montserrat);
-        font-weight: 700;
         font-size: 2.6rem;
     }
 
-    .nombre{
-        color: var(--Agua-Marina);
-    }
-
     .saludo__parrafo{
-        margin-bottom: 3rem;
         padding-inline: 6%;
-        font-family: var(--Poppins);
         font-size: 1.2rem;
-        font-weight: 200;
-        word-spacing: .2rem;
     }
-
-    .saludo__btn{
-        display: block;
-        padding: 1rem 2.6rem;
-        border: none;
-        border-radius: .5rem;
-        font-family: var(--Montserrat);
-        font-weight: 800;
-        font-size: 1rem;
-        color: white;
-        background-color: rgb(238, 81, 81);
-    }
-}
-
-.video-background{
-    display: none;
 }
