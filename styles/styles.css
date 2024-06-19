@@ -76,6 +76,12 @@ body{
     transition: .4s;
 }
 
+.redes__sociales{
+    display: flex;
+    gap: 3rem;
+    font-size: 3rem;
+}
+
 .mas__informacion{
     display: none;
 }
@@ -87,8 +93,6 @@ body{
 .main__content{
     padding: 5rem 6%;
 }
-
-/* Cambios */
 
 .seccion__saludo{
     display: flex;
@@ -125,8 +129,6 @@ body{
     background-color: var(--Rojo-Salmon);
 }
 
-/* Fin de cambios */
-
 @media (min-width: 769px){
 
     .cabeza{
@@ -157,6 +159,11 @@ body{
         text-wrap: nowrap;
     }
 
+    .redes__sociales{
+        position: absolute;
+        top: 4.3rem;
+        right: 2%;
+    }
 }
 
 @media (min-width: 1024px){
@@ -172,6 +179,32 @@ body{
     .opcion__enlace{
         font-size: 100%;
         text-wrap: nowrap;
+    }
+}
+
+@media (min-width: 1200px){
+
+    .cabeza__navbar, .navbar__lista, .lista__opcion{
+        all: initial;
+    }
+
+    .navbar__lista, .redes__sociales{
+        display: flex;
+        gap: 3rem;
+    }
+
+    .navbar__lista{
+        align-items: center;
+    }
+
+    .lista__opcion{
+        font-family: var(--Poppins);
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    .redes__sociales{
+        font-size: 2.5rem;
     }
 }
 
