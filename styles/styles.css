@@ -114,7 +114,32 @@ body{
     font-family: var(--Poppins);
     font-weight: 200;
     word-spacing: .2rem;
+
+    /* Estilos experimentales */
+    
+    /* width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 2s steps(227), cursor 4s step-end infinite alternate; */
+
+    /* Estilos experimentales */
 }
+
+/* Estilos experimentales */
+
+/* @keyframes cursor{
+    50%{
+        border-color: transparent;
+    }
+}
+
+@keyframes typing{
+    from{
+        width: 0;
+    }
+} */
+
+/* Estilos experimentales */
 
 .saludo__btn{
     display: block;
@@ -164,6 +189,19 @@ body{
         top: 4.3rem;
         right: 2%;
     }
+
+    .saludo__titulo{
+        font-size: 3.2rem;
+    }
+
+    .salto__linea{
+        display: none;
+    }
+
+    .saludo__parrafo{
+        width: 80%;
+        font-size: 1.4rem;
+    }
 }
 
 @media (min-width: 1024px){
@@ -179,6 +217,10 @@ body{
     .opcion__enlace{
         font-size: 100%;
         text-wrap: nowrap;
+    }
+
+    .saludo__titulo{
+        font-size: 3.8rem;
     }
 }
 
@@ -205,6 +247,15 @@ body{
 
     .redes__sociales{
         font-size: 2.5rem;
+    }
+
+    .saludo__titulo{
+        font-size: 4.5rem;
+    }
+
+    .saludo__parrafo{
+        width: 55%;
+        font-size: 1.8rem;
     }
 }
 
