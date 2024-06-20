@@ -148,10 +148,11 @@ body{
     border: none;
     border-radius: .5rem;
     font-family: var(--Montserrat);
-    font-weight: 800;
     font-size: 1rem;
+    font-weight: 800;
     color: white;
     background-color: var(--Rojo-Salmon);
+    cursor: pointer;
 }
 
 @media (min-width: 769px){
@@ -201,6 +202,10 @@ body{
     .saludo__parrafo{
         width: 80%;
         font-size: 1.4rem;
+    }
+
+    .saludo__btn{
+        font-size: 1.2rem;
     }
 }
 
