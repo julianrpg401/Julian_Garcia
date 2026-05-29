@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Julian Garcia</title>
+    <title>Julian Garcia — CV</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="styles/styles.css">
 </head>
@@ -16,47 +16,226 @@
         <!-- Logo -->
         <img src="assets/img/logo-julian.svg" alt="logo.svg" class="cabeza__logo">
 
-        <!-- Barra de menu -->
-        <label for="menu-bar" class="fa-solid fa-bars cabeza__barra"></label>
+        <!-- Overlay (cierra el menu al hacer click fuera) -->
         <input type="checkbox" id="menu-bar" class="cabeza__input">
-        
-        <!-- Menu de navegacion -->
-        <nav class="cabeza__navbar">
-            <ul class="navbar__lista">
-                <li class="lista__opcion"><a href="#sobre-mi" class="opcion__enlace">Sobre mi</a></li>
-                <li class="lista__opcion"><a href="#" class="opcion__enlace">Proyectos</a></li>
-                <li class="lista__opcion"><a href="#" class="opcion__enlace">Habilidades</a></li>
-                <li class="lista__opcion"><a href="#" class="opcion__enlace">Contacto</a></li>
+        <label for="menu-bar" class="cabeza__overlay" aria-hidden="true"></label>
 
-                <!-- Redes sociales -->
-                <li class="lista__opcion redes__sociales">
-                    <a href="https://github.com/julianrpg401" class="fa-brands fa-github opcion__enlace opcion__contacto"></a>
-                    <a href="https://www.linkedin.com/in/julianrpg401/" class="fa-brands fa-linkedin opcion__enlace opcion__contacto"></a>
-                </li>
+        <!-- Barra de menu (mobile) -->
+        <label for="menu-bar" class="cabeza__barra" aria-label="Abrir menú">
+            <span class="barra__icono barra__icono--open"><i class="fa-solid fa-bars"></i></span>
+            <span class="barra__icono barra__icono--close"><i class="fa-solid fa-xmark"></i></span>
+        </label>
+
+        <!-- Menu de navegacion -->
+        <nav class="cabeza__navbar" aria-label="Navegación principal">
+            <!-- Boton cerrar dentro del drawer -->
+            <label for="menu-bar" class="cabeza__cerrar" aria-label="Cerrar menú">
+                <i class="fa-solid fa-xmark"></i>
+            </label>
+
+            <ul class="navbar__lista">
+                <li class="lista__opcion"><a href="#sobre-mi" class="opcion__enlace">Sobre mí</a></li>
+                <li class="lista__opcion"><a href="#experiencia" class="opcion__enlace">Experiencia</a></li>
+                <li class="lista__opcion"><a href="#habilidades" class="opcion__enlace">Habilidades</a></li>
+                <li class="lista__opcion"><a href="#formacion" class="opcion__enlace">Formación</a></li>
+                <li class="lista__opcion"><a href="#contacto" class="opcion__enlace">Contacto</a></li>
             </ul>
+
+            <!-- Redes sociales dentro del drawer -->
+            <div class="navbar__sociales">
+                <a href="https://github.com/julianrpg401" target="_blank" rel="noopener noreferrer" class="fa-brands fa-github social__enlace" aria-label="GitHub"></a>
+                <a href="https://www.linkedin.com/in/julianrpg401/" target="_blank" rel="noopener noreferrer" class="fa-brands fa-linkedin social__enlace" aria-label="LinkedIn"></a>
+            </div>
         </nav>
+
+        <!-- Redes sociales visibles en desktop -->
+        <div class="cabeza__sociales">
+            <a href="https://github.com/julianrpg401" target="_blank" rel="noopener noreferrer" class="fa-brands fa-github social__enlace" aria-label="GitHub"></a>
+            <a href="https://www.linkedin.com/in/julianrpg401/" target="_blank" rel="noopener noreferrer" class="fa-brands fa-linkedin social__enlace" aria-label="LinkedIn"></a>
+        </div>
     </header>
 
-    <!-- Seccion principal -->
     <main class="main__content">
 
-        <!-- Seccion sobre mí -->
-        <section id="sobre-mi" class="seccion__saludo">
-            <h1 class="saludo__titulo">¡Hola!<br class="salto__linea"> soy <span class="nombre">Julian</span>,<br>desarrollador web.</h1>
-            <p class="saludo__parrafo">Soy un desarrollador junior apasionado, me dedico a crear experiencias web atractivas y fáciles de usar que aprovechan las últimas tecnologías y las mejores prácticas. Colaboremos juntos para dar vida a tus ideas de desarrollo.</p>
-            
-            <div id="mas-informacion" class="mas__informacion">
-                <p class="saludo__parrafo">Tengo un año de experiencia en distintas areas del desarrollo web y del diseño, estoy buscando oportunidades para aprender y crecer. Mi objetivo es contribuir a proyectos innovadores que tengan un impacto positivo y continuar desarrollando mis habilidades técnicas, sea del lado del Front-End o del Back-End.</p>
+        <!-- ── HERO / SOBRE MÍ ── -->
+        <section id="sobre-mi" class="seccion__hero">
+            <div class="hero__texto">
+                <p class="hero__saludo">¡Hola, soy</p>
+                <h1 class="hero__nombre">Julian Andrey<br><span class="nombre__acento">Garcia Quintero</span></h1>
+                <p class="hero__cargo">Desarrollador Full Stack · .NET &amp; React</p>
+                <p class="hero__perfil">Desarrollador full stack con enfoque en .NET. He participado en el diseño y construcción de soluciones web con énfasis en rendimiento, escalabilidad y buenas prácticas, resolviendo problemas con criterio técnico y arquitectura limpia. Me caracterizo por aprender rápido, integrar librerías populares en mis proyectos e incluso crear mi propia librería para el mapeo de objetos en .NET. También he diseñado interfaces de usuario con React que consumen mis propias APIs, y he llevado diseños complejos a proyectos con Razor Pages y MVC. Busco seguir creciendo como desarrollador .NET o full stack con .NET y React.</p>
+                <div class="hero__botones">
+                    <a href="#experiencia" class="btn btn--primario">Ver experiencia</a>
+                    <a href="#contacto" class="btn btn--secundario">Contacto</a>
+                </div>
             </div>
-
-            <button id="ver-mas" class="saludo__btn">VER MÁS</button>
+            <div class="hero__foto">
+                <div class="foto__marco">
+                    <img src="assets/img/avatar.png" alt="Avatar de Julian Garcia" class="foto__img">
+                </div>
+            </div>
         </section>
 
-        <!-- Seccion proyectos -->
-        <section class="proyectos">
-            
+        <!-- ── EXPERIENCIA ── -->
+        <section id="experiencia" class="seccion">
+            <h2 class="seccion__titulo">Experiencia</h2>
+            <div class="seccion__separador"></div>
+            <div class="experiencia__grid">
+
+                <!-- MappShark -->
+                <article class="exp__card exp__card--destacada">
+                    <div class="exp__header">
+                        <div class="exp__icono exp__icono--logo">
+                            <img src="assets/img/MappShark.png" alt="Logo MappShark" class="exp__logo">
+                        </div>
+                        <div>
+                            <h3 class="exp__nombre">MappShark</h3>
+                            <span class="exp__tipo">Librería NuGet</span>
+                        </div>
+                        <span class="exp__rol">Desarrollador Backend</span>
+                    </div>
+                    <p class="exp__descripcion">Codifiqué y diseñé un mapeador de objetos en .NET con atributos de sintaxis declarativa y optimizaciones de rendimiento.</p>
+                    <ul class="exp__logros">
+                        <li><i class="fa-solid fa-circle-check logro__check"></i> +1.000 descargas en menos de un mes</li>
+                        <li><i class="fa-solid fa-circle-check logro__check"></i> 47% más rápida que AutoMapper en tipos anidados y colecciones</li>
+                        <li><i class="fa-solid fa-circle-check logro__check"></i> Tiempo de startup de <strong>0 ms</strong></li>
+                        <li><i class="fa-solid fa-circle-check logro__check"></i> 24% menos asignación de memoria por operación vs AutoMapper</li>
+                    </ul>
+                    <div class="exp__tags">
+                        <span class="tag">.NET</span><span class="tag">C#</span><span class="tag">NuGet</span>
+                    </div>
+                </article>
+
+                <!-- Prattle -->
+                <article class="exp__card">
+                    <div class="exp__header">
+                        <div class="exp__icono exp__icono--logo">
+                            <img src="assets/icon/Prattle-Icon.svg" alt="Logo Prattle" class="exp__logo">
+                        </div>
+                        <div>
+                            <h3 class="exp__nombre">Prattle</h3>
+                            <span class="exp__tipo">Aplicación Web</span>
+                        </div>
+                        <span class="exp__rol">Desarrollador Full Stack</span>
+                    </div>
+                    <p class="exp__descripcion">Diseñé y codifiqué una red social enfocada al debate de opiniones usando Clean Architecture, backend en ASP.NET y frontend en React + Vite.</p>
+                    <div class="exp__tags">
+                        <span class="tag">ASP.NET</span><span class="tag">React</span><span class="tag">Vite</span><span class="tag">Clean Architecture</span>
+                    </div>
+                </article>
+
+                <!-- JobTI -->
+                <article class="exp__card">
+                    <div class="exp__header">
+                        <div class="exp__icono exp__icono--logo exp__icono--dark">
+                            <img src="assets/icon/isologo.png" alt="Logo JobTI" class="exp__logo">
+                        </div>
+                        <div>
+                            <h3 class="exp__nombre">JobTI</h3>
+                            <span class="exp__tipo">Aplicación Web</span>
+                        </div>
+                        <span class="exp__rol">Desarrollador Full Stack</span>
+                    </div>
+                    <p class="exp__descripcion">Diseñé y codifiqué un portal de empleo enfocado al sector TI con Razor Pages usando C#, con funcionalidad para almacenar hasta 5 currículums.</p>
+                    <div class="exp__tags">
+                        <span class="tag">Razor Pages</span><span class="tag">C#</span><span class="tag">SQL Server</span>
+                    </div>
+                </article>
+
+            </div>
         </section>
+
+        <!-- ── HABILIDADES ── -->
+        <section id="habilidades" class="seccion">
+            <h2 class="seccion__titulo">Habilidades</h2>
+            <div class="seccion__separador"></div>
+            <div class="habilidades__grid">
+                <div class="habilidad__item"><i class="fa-solid fa-server habilidad__icono"></i><span>ASP.NET</span></div>
+                <div class="habilidad__item"><i class="fa-solid fa-code habilidad__icono"></i><span>C#</span></div>
+                <div class="habilidad__item"><i class="fa-brands fa-react habilidad__icono"></i><span>React</span></div>
+                <div class="habilidad__item"><i class="fa-solid fa-database habilidad__icono"></i><span>PostgreSQL</span></div>
+                <div class="habilidad__item"><i class="fa-solid fa-database habilidad__icono"></i><span>SQL Server</span></div>
+                <div class="habilidad__item"><i class="fa-solid fa-layer-group habilidad__icono"></i><span>Entity Framework</span></div>
+                <div class="habilidad__item"><i class="fa-brands fa-git-alt habilidad__icono"></i><span>Git</span></div>
+                <div class="habilidad__item"><i class="fa-solid fa-shield-halved habilidad__icono"></i><span>JWT</span></div>
+                <div class="habilidad__item"><i class="fa-solid fa-plug habilidad__icono"></i><span>APIs REST</span></div>
+                <div class="habilidad__item"><i class="fa-solid fa-check-double habilidad__icono"></i><span>Fluent Validation</span></div>
+                <div class="habilidad__item"><i class="fa-brands fa-css3-alt habilidad__icono"></i><span>Tailwind CSS</span></div>
+                <div class="habilidad__item"><i class="fa-solid fa-scroll habilidad__icono"></i><span>Serilog</span></div>
+            </div>
+        </section>
+
+        <!-- ── FORMACIÓN ACADÉMICA ── -->
+        <section id="formacion" class="seccion">
+            <h2 class="seccion__titulo">Formación Académica</h2>
+            <div class="seccion__separador"></div>
+            <div class="formacion__timeline">
+
+                <div class="timeline__item">
+                    <div class="timeline__badge badge--activo">EN CURSO</div>
+                    <div class="timeline__contenido">
+                        <h3 class="timeline__titulo">Ingeniería de Software</h3>
+                        <p class="timeline__institucion">I.U Pascual Bravo — 8vo semestre</p>
+                    </div>
+                </div>
+
+                <div class="timeline__item">
+                    <div class="timeline__badge">2021</div>
+                    <div class="timeline__contenido">
+                        <h3 class="timeline__titulo">Técnico en Diseño</h3>
+                        <p class="timeline__institucion">SENA — Servicio Nacional de Aprendizaje</p>
+                    </div>
+                </div>
+
+                <div class="timeline__item">
+                    <div class="timeline__badge">2021</div>
+                    <div class="timeline__contenido">
+                        <h3 class="timeline__titulo">Bachiller Académico</h3>
+                        <p class="timeline__institucion">I.E Héctor Abad Gómez</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ── CONTACTO & REFERENCIAS ── -->
+        <section id="contacto" class="seccion">
+            <h2 class="seccion__titulo">Contacto</h2>
+            <div class="seccion__separador"></div>
+            <div class="contacto__grid">
+
+                <div class="contacto__info">
+                    <h3 class="contacto__subtitulo">Información personal</h3>
+                    <ul class="contacto__lista">
+                        <li><i class="fa-solid fa-phone contacto__icono"></i> <a href="tel:+573112154098" class="contacto__link">311 215 4098</a></li>
+                        <li><i class="fa-solid fa-envelope contacto__icono"></i> <a href="mailto:julianrpg401@gmail.com" class="contacto__link">julianrpg401@gmail.com</a></li>
+                        <li><i class="fa-solid fa-location-dot contacto__icono"></i> Avenida 47B #65-69, Bello — Antioquia</li>
+                        <li><i class="fa-brands fa-github contacto__icono"></i> <a href="https://github.com/julianrpg401" target="_blank" rel="noopener noreferrer" class="contacto__link">github.com/julianrpg401</a></li>
+                        <li><i class="fa-brands fa-linkedin contacto__icono"></i> <a href="https://www.linkedin.com/in/julianrpg401/" target="_blank" rel="noopener noreferrer" class="contacto__link">linkedin.com/in/julianrpg401</a></li>
+                    </ul>
+                </div>
+
+                <div class="contacto__referencia">
+                    <h3 class="contacto__subtitulo">Referencia</h3>
+                    <div class="referencia__card">
+                        <div class="referencia__avatar"><i class="fa-solid fa-user-tie"></i></div>
+                        <div>
+                            <p class="referencia__nombre">Jorge Cespedes</p>
+                            <p class="referencia__cargo">Soporte Técnico — Almacenes Flamingo</p>
+                            <p class="referencia__cel"><i class="fa-solid fa-mobile-screen"></i> 301 703 3773</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
     </main>
+
+    <footer class="pie">
+        <p>© 2026 Julian Andrey Garcia Quintero — Bello, Antioquia</p>
+    </footer>
+
 <script src="scripts/scripts.js"></script>
 </body>
 </html>
