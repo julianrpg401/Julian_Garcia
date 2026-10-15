@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Favicon: la J del logo dentro del anillo de puntos teal (el motivo del avatar y la intro) -->
+  <rect width="64" height="64" rx="14" fill="#0a0a0f"/>
+  <g fill="#52c7a0">
+    <circle cx="32" cy="9" r="3"/>
+    <circle cx="43.5" cy="12.1" r="2.6" opacity=".85"/>
+    <circle cx="51.9" cy="20.5" r="2.2" opacity=".65"/>
+    <circle cx="55" cy="32" r="2.6" opacity=".85"/>
+    <circle cx="51.9" cy="43.5" r="3"/>
+    <circle cx="43.5" cy="51.9" r="2.6" opacity=".85"/>
+    <circle cx="32" cy="55" r="2.2" opacity=".65"/>
+    <circle cx="20.5" cy="51.9" r="2.6" opacity=".85"/>
+    <circle cx="12.1" cy="43.5" r="3"/>
+    <circle cx="9" cy="32" r="2.6" opacity=".85"/>
+    <circle cx="12.1" cy="20.5" r="2.2" opacity=".65"/>
+    <circle cx="20.5" cy="12.1" r="2.6" opacity=".85"/>
+  </g>
+  <path fill="#fff" d="M26 19h14v18.5a9.5 9.5 0 0 1-9.5 9.5h-.5a9 9 0 0 1-7.4-3.9l4.6-3.8a3.4 3.4 0 0 0 2.8 1.4h.5a3 3 0 0 0 3-3V25H26z"/>
+</svg>
