@@ -212,22 +212,225 @@ body {
     outline-offset: 3px;
 }
 
+/* ---- BOTON DE SONIDO ---- */
+.cabeza__sonido {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: rgba(255,255,255,.7);
+    cursor: pointer;
+    transition: border-color var(--transition), background var(--transition), color var(--transition);
+}
+
+.cabeza__sonido:hover {
+    border-color: var(--teal);
+    background: var(--teal-glow);
+    color: var(--teal);
+}
+
+.cabeza__sonido[aria-pressed="true"] { color: var(--teal); }
+
+/* Cuatro barras de ecualizador: planas en silencio, en movimiento con sonido */
+.sonido__barras { display: flex; align-items: flex-end; gap: 2px; height: 16px; }
+
+.sonido__barras span {
+    width: 3px;
+    height: 100%;
+    border-radius: 2px;
+    background: currentColor;
+    transform: scaleY(.3);
+    transform-origin: bottom;
+    transition: transform .3s ease;
+}
+
+/* En silencio, barras quietas de distinta altura: se lee como un ecualizador apagado */
+.sonido__barras span:nth-child(2) { transform: scaleY(.6); }
+.sonido__barras span:nth-child(3) { transform: scaleY(.45); }
+.sonido__barras span:nth-child(4) { transform: scaleY(.25); }
+
+.cabeza__sonido[aria-pressed="true"] .sonido__barras span { animation: ecualizador 1.1s ease-in-out infinite alternate; }
+.cabeza__sonido[aria-pressed="true"] .sonido__barras span:nth-child(2) { animation-duration: .8s;  animation-delay: -.3s; }
+.cabeza__sonido[aria-pressed="true"] .sonido__barras span:nth-child(3) { animation-duration: 1.3s; animation-delay: -.6s; }
+.cabeza__sonido[aria-pressed="true"] .sonido__barras span:nth-child(4) { animation-duration: .95s; animation-delay: -.15s; }
+
+@keyframes ecualizador {
+    from { transform: scaleY(.25); }
+    to   { transform: scaleY(1); }
+}
+
+/* ---- BIENVENIDA ---- */
+html.bienvenida-activa { overflow: hidden; }
+html.bienvenida-activa body > :not(.bienvenida) { visibility: hidden; }
+
+.bienvenida {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(ellipse at 50% 42%, #10131b, var(--bg) 70%);
+    transition: opacity .6s ease .1s;
+}
+
+.bienvenida.saliendo { opacity: 0; pointer-events: none; }
+
+.bienvenida__puntos {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.bienvenida__centro {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-inline: 16px;
+    text-align: center;
+    transition: opacity .45s ease, transform .6s ease;
+}
+
+.bienvenida.saliendo .bienvenida__centro { opacity: 0; transform: scale(1.04); }
+
+.bienvenida__anillo {
+    display: grid;
+    place-items: center;
+    width: var(--anillo, 400px);
+    height: var(--anillo, 400px);
+}
+
+.bienvenida__logo {
+    /* Cabe holgado dentro del anillo interior */
+    width: calc(var(--interior, 300px) * .8);
+    opacity: 0;
+    transform: scale(.94);
+    filter: blur(6px);
+    transition: opacity .8s ease, transform 1s cubic-bezier(.2, .7, .3, 1), filter .8s ease;
+}
+
+.bienvenida__lema {
+    margin-top: .3rem;
+    font-size: .95rem;
+    color: var(--text-muted);
+    letter-spacing: .03em;
+}
+
+.bienvenida__acciones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .8rem;
+    margin-top: 1.8rem;
+}
+
+.bienvenida__acciones .btn { display: inline-flex; align-items: center; gap: .55rem; }
+
+.bienvenida__ayuda {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    margin-top: 1.2rem;
+    font-size: .78rem;
+    color: var(--text-muted);
+}
+
+.bienvenida__ayuda kbd + kbd,
+.bienvenida__ayuda kbd:not(:first-child) { margin-left: .6rem; }
+
+kbd {
+    padding: .1rem .45rem;
+    border: 1px solid var(--border);
+    border-radius: .3rem;
+    background: var(--surface);
+    font-family: inherit;
+    font-size: .72rem;
+    color: rgba(255,255,255,.8);
+}
+
+/* Estados de la intro (scripts/bienvenida.js):
+   espera  -> la ola ondula y se ven los botones
+   forma   -> los botones se van; el logo y el lema llegan cuando el anillo se cierra
+   quieta  -> con «reducir movimiento», todo visible desde el inicio */
+.bienvenida__lema,
+.bienvenida__acciones,
+.bienvenida__ayuda {
+    transition: opacity .5s ease, transform .5s ease, visibility 0s linear .5s;
+}
+
+.bienvenida__lema { opacity: 0; visibility: hidden; transform: translateY(10px); }
+
+.bienvenida__acciones,
+.bienvenida__ayuda {
+    animation: aparecer-acciones .6s ease .35s backwards;
+}
+
+.bienvenida__ayuda { animation-delay: .5s; }
+
+@keyframes aparecer-acciones {
+    from { opacity: 0; transform: translateY(10px); }
+}
+
+.bienvenida--forma .bienvenida__acciones,
+.bienvenida--forma .bienvenida__ayuda {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+}
+
+.bienvenida--forma .bienvenida__logo,
+.bienvenida--quieta .bienvenida__logo {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition-delay: .55s;
+}
+
+.bienvenida--forma .bienvenida__lema,
+.bienvenida--quieta .bienvenida__lema {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: opacity .5s ease .85s, transform .5s ease .85s, visibility 0s;
+}
+
+/* Los atajos de teclado no aplican en pantallas tactiles */
+@media (hover: none) {
+    .bienvenida__ayuda { display: none; }
+}
+
 /* ---- MAIN ---- */
 .main__content { padding: 0 6% 4rem; }
 
 /* ---- HERO ---- */
+/* Cuadricula: el avatar comparte fila solo con el nombre y el perfil (asi queda alineado con ellos);
+   los botones y las cifras van en una fila aparte debajo. */
 .seccion__hero {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 600px) auto;
+    grid-template-areas:
+        "texto foto"
+        "acciones .";
     align-items: center;
+    align-content: center;
     justify-content: center;
-    gap: clamp(3rem, 8vw, 8rem);
-    min-height: 90vh;
-    padding-block: 6rem 4rem;
+    column-gap: clamp(3rem, 8vw, 8rem);
+    /* Llena la pantalla bajo el header (73 px) sin empujar la presentacion hacia abajo */
+    min-height: calc(100vh - 73px);
+    min-height: calc(100svh - 73px);
+    padding-block: clamp(2rem, 5vh, 3.5rem);
     max-width: 1200px;
     margin-inline: auto;
 }
 
-.hero__texto { flex: 1; min-width: 0; max-width: 600px; container-type: inline-size; }
+.hero__texto { grid-area: texto; min-width: 0; max-width: 600px; container-type: inline-size; }
+.hero__acciones { grid-area: acciones; min-width: 0; max-width: 600px; margin-top: 2.2rem; }
 
 .hero__saludo {
     font-size: 1.1rem;
@@ -296,7 +499,6 @@ body {
     font-weight: 300;
     line-height: 1.75;
     color: rgba(255,255,255,.82);
-    margin-bottom: 2.4rem;
     max-width: 580px;
 }
 
@@ -344,8 +546,8 @@ body {
 
 /* Foto con campo de puntos interactivo (lo dibuja scripts.js) */
 .hero__foto {
+    grid-area: foto;
     position: relative;
-    flex-shrink: 0;
     width: 480px;
     height: 480px;
     display: grid;
@@ -949,13 +1151,18 @@ body {
 /* ---- RESPONSIVE TABLET ---- */
 @media (max-width: 1024px) {
     .seccion__hero {
-        flex-direction: column-reverse;
-        align-items: center;
+        grid-template-columns: minmax(0, 600px);
+        grid-template-areas:
+            "foto"
+            "texto"
+            "acciones";
+        justify-items: center;
         text-align: center;
         min-height: auto;
-        padding-block: 4rem 3rem;
+        padding-block: 3rem;
     }
-    .hero__texto { width: 100%; }
+    .hero__texto, .hero__acciones { width: 100%; }
+    .hero__foto { margin-bottom: 1.5rem; }
     .hero__perfil { max-width: 100%; }
     .hero__botones { justify-content: center; }
     .hero__rol { justify-content: center; }
@@ -970,7 +1177,9 @@ body {
 /* ---- RESPONSIVE: MENU EN CAJON ---- */
 @media (max-width: 1024px) {
 
-    .cabeza__barra { display: flex; }
+    .cabeza { gap: .6rem; }
+    .cabeza__barra { display: flex; order: 2; }
+    .cabeza__sonido { order: 1; margin-left: auto; }
     .cabeza__sociales { display: none; }
     .cabeza--abierta .cabeza__overlay { display: block; animation: aparecer-overlay .3s ease; }
 
@@ -1094,4 +1303,6 @@ body {
     .rol__cursor, .punto-vivo::after { animation: none; }
     .cabeza { transition: none; }
     .navbar__lista > li, .cabeza .navbar__cta, .navbar__pie { translate: none; }
+    .cabeza__sonido[aria-pressed="true"] .sonido__barras span { animation: none; transform: scaleY(.65); }
+    .bienvenida, .bienvenida * { transition: none !important; animation: none !important; }
 }

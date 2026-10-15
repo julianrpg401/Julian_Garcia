@@ -16,11 +16,13 @@ const abrirMenu = ({ desdeTeclado }) => {
     document.body.style.overflow = 'hidden';
     // Keyboard users land on the first option; touch and mouse users get no focus ring
     if (desdeTeclado) menu.querySelector('.opcion__enlace').focus();
+    window.Sonido?.efecto('abrir');
 };
 
-const cerrarMenu = ({ devolverFoco = true } = {}) => {
+const cerrarMenu = ({ devolverFoco = true, conSonido = true } = {}) => {
     if (!menuAbierto()) return;
     cabeza.classList.remove('cabeza--abierta');
+    if (conSonido) window.Sonido?.efecto('cerrar');
     botonMenu.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
     if (devolverFoco) botonMenu.focus();
@@ -30,7 +32,8 @@ botonMenu.addEventListener('click', e => abrirMenu({ desdeTeclado: e.detail === 
 document.querySelector('.cabeza__cerrar').addEventListener('click', () => cerrarMenu());
 document.querySelector('.cabeza__overlay').addEventListener('click', () => cerrarMenu());
 menu.querySelectorAll('a[href^="#"]').forEach(enlace => {
-    enlace.addEventListener('click', () => cerrarMenu({ devolverFoco: false }));
+    // The link click already plays its own sound
+    enlace.addEventListener('click', () => cerrarMenu({ devolverFoco: false, conSonido: false }));
 });
 modoCajon.addEventListener('change', () => cerrarMenu({ devolverFoco: false }));
 
@@ -82,6 +85,7 @@ const activateLink = () => {
         current = sections[sections.length - 1].id;
     }
     if (current === seccionActual) return;
+    if (seccionActual !== null) window.Sonido?.efecto('seccion');
     seccionActual = current;
 
     navLinks.forEach(link => {
@@ -196,24 +200,18 @@ if (!reducirMovimiento) {
     document.querySelectorAll('.stat__numero[data-count]').forEach(el => observadorStats.observe(el));
 }
 
-// Hero: dot field around the avatar. A slow ripple runs outward (echoing the
-// particle wave of the background video) and the dots near the pointer move
-// away and turn violet, the same color every box uses on hover.
+// Hero: dot field around the avatar (drawing rules shared with the intro in puntos.js)
 const lienzo = document.querySelector('.foto__puntos');
 
 if (lienzo) {
     const ctx = lienzo.getContext('2d');
     const marco = document.querySelector('.foto__marco');
     const hero = document.querySelector('.seccion__hero');
-    const TEAL = [82, 199, 160];
-    const VIOLETA = [158, 140, 255];
-    const ALCANCE = 95;
+    const puntero = Puntos.puntero();
 
     let puntos = [];
-    let centro = 0;
     let radioExterior = 0;
     let radioInterior = 0;
-    const puntero = { x: 0, y: 0, suaveX: 0, suaveY: 0, fuerza: 0, fuerzaObjetivo: 0 };
     let enPantalla = true;
 
     const construir = () => {
@@ -223,7 +221,7 @@ if (lienzo) {
         lienzo.height = lado * dpr;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-        centro = lado / 2;
+        const centro = lado / 2;
         radioExterior = centro - 4;
         radioInterior = marco.offsetWidth / 2 + 16;
         const paso = lado > 380 ? 13 : 11;
@@ -232,43 +230,19 @@ if (lienzo) {
         for (let r = radioInterior; r <= radioExterior; r += paso) {
             const cantidad = Math.floor((2 * Math.PI * r) / paso);
             const desfase = Math.random() * Math.PI;
+            const borde = Puntos.borde(r, radioInterior, radioExterior);
             for (let i = 0; i < cantidad; i++) {
                 const a = desfase + (i / cantidad) * Math.PI * 2;
-                puntos.push({ a, r, x: centro + Math.cos(a) * r, y: centro + Math.sin(a) * r });
+                puntos.push({ a, r, borde, x: centro + Math.cos(a) * r, y: centro + Math.sin(a) * r });
             }
         }
         dibujar(0);
     };
 
     const dibujar = t => {
-        const lado = lienzo.clientWidth;
-        ctx.clearRect(0, 0, lado, lado);
-
-        puntero.suaveX += (puntero.x - puntero.suaveX) * 0.12;
-        puntero.suaveY += (puntero.y - puntero.suaveY) * 0.12;
-        puntero.fuerza += (puntero.fuerzaObjetivo - puntero.fuerza) * 0.08;
-
-        for (const p of puntos) {
-            const onda = Math.sin(p.r * 0.055 - t * 1.5 + Math.sin(p.a * 3 + t * 0.35) * 0.9) * 0.5 + 0.5;
-            const borde = 1 - Math.pow((p.r - radioInterior) / (radioExterior - radioInterior), 2) * 0.75;
-
-            const dx = p.x - puntero.suaveX;
-            const dy = p.y - puntero.suaveY;
-            const distancia = Math.hypot(dx, dy);
-            const cerca = distancia < ALCANCE ? Math.pow(1 - distancia / ALCANCE, 2) * puntero.fuerza : 0;
-            const empuje = cerca * 14;
-            const x = p.x + (distancia ? (dx / distancia) * empuje : 0);
-            const y = p.y + (distancia ? (dy / distancia) * empuje : 0);
-
-            const color = TEAL.map((c, k) => Math.round(c + (VIOLETA[k] - c) * cerca));
-            const alfa = (0.22 + onda * 0.68) * borde + cerca * 0.5;
-            const radio = 0.9 + onda * 1.5 * borde + cerca * 1.6;
-
-            ctx.beginPath();
-            ctx.arc(x, y, radio, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${Math.min(alfa, 1)})`;
-            ctx.fill();
-        }
+        ctx.clearRect(0, 0, lienzo.clientWidth, lienzo.clientWidth);
+        Puntos.avanzar(puntero);
+        for (const p of puntos) Puntos.dibujar(ctx, p.x, p.y, p.r, p.a, t, p.borde, puntero);
     };
 
     const animar = ahora => {
@@ -279,19 +253,24 @@ if (lienzo) {
     construir();
     new ResizeObserver(construir).observe(lienzo);
 
+    // A click on the ring (not on the avatar) sends a shockwave through the dots and plays the ferrofluid sound;
+    // hovering the ring plays it too (Sonido.seguirFerro)
+    const enAnillo = e => {
+        const caja = lienzo.getBoundingClientRect();
+        const d = Math.hypot(e.clientX - caja.left - caja.width / 2, e.clientY - caja.top - caja.height / 2);
+        return d > radioInterior - 12 && d < radioExterior + 8;
+    };
+    const foto = document.querySelector('.hero__foto');
+    foto.addEventListener('pointerdown', e => {
+        if (!enAnillo(e)) return;
+        const caja = lienzo.getBoundingClientRect();
+        Puntos.pulso(puntero, e.clientX - caja.left, e.clientY - caja.top);
+        window.Sonido?.ferro({ tipo: 'clic', paneo: 0.3 });
+    });
+    window.Sonido?.seguirFerro(foto, enAnillo, () => 0.3);
+
     if (!reducirMovimiento) {
-        hero.addEventListener('pointermove', e => {
-            const caja = lienzo.getBoundingClientRect();
-            puntero.x = e.clientX - caja.left;
-            puntero.y = e.clientY - caja.top;
-            // On (re)entry, jump to the pointer instead of sweeping across the field
-            if (puntero.fuerza < 0.05) {
-                puntero.suaveX = puntero.x;
-                puntero.suaveY = puntero.y;
-            }
-            puntero.fuerzaObjetivo = 1;
-        });
-        hero.addEventListener('pointerleave', () => { puntero.fuerzaObjetivo = 0; });
+        Puntos.seguir(hero, lienzo, puntero);
         new IntersectionObserver(([entrada]) => { enPantalla = entrada.isIntersecting; }).observe(lienzo);
         requestAnimationFrame(animar);
     }

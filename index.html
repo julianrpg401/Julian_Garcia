@@ -7,6 +7,11 @@
     <title>Julian Garcia — CV</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="styles/styles.css">
+    <script>
+        // Bienvenida: se decide antes de pintar para que la pagina no destelle (ver scripts/bienvenida.js)
+        try { if (sessionStorage.getItem('bienvenida') !== 'vista') document.documentElement.classList.add('bienvenida-activa'); } catch (e) {}
+        setTimeout(function () { if (!window.Bienvenida) document.documentElement.classList.remove('bienvenida-activa'); }, 4000);
+    </script>
 </head>
 <body>
     <!-- Video de fondo -->
@@ -53,6 +58,11 @@
             </div>
         </nav>
 
+        <!-- Sonido: silencio o efectos + ambiente (scripts/sonido.js) -->
+        <button type="button" class="cabeza__sonido" aria-pressed="false" aria-label="Activar sonido" title="Activar sonido">
+            <span class="sonido__barras" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+        </button>
+
         <!-- Redes sociales visibles en escritorio -->
         <div class="cabeza__sociales">
             <a href="https://github.com/julianrpg401" target="_blank" rel="noopener noreferrer" class="fa-brands fa-github social__enlace" aria-label="GitHub"></a>
@@ -77,6 +87,15 @@
                 </p>
 
                 <p class="hero__perfil">Soy Analista de Soluciones en <strong>Conaltura</strong>, donde trabajo como arquitecto y desarrollador full stack: convierto procesos manuales de las áreas de negocio en aplicaciones mantenibles, desde la especificación hasta el despliegue. Construyo aplicaciones web con .NET y React, y automatizo procesos contables y de datos con Python. También creé <strong>MappShark</strong>, mi propia librería de mapeo de objetos para .NET, que hoy uso en los proyectos de la empresa.</p>
+            </div>
+            <div class="hero__foto">
+                <canvas class="foto__puntos" aria-hidden="true"></canvas>
+                <div class="foto__marco">
+                    <img src="assets/img/avatar.png" alt="Avatar de Julian Garcia" class="foto__img">
+                </div>
+            </div>
+            <!-- Botones y cifras: fila aparte, para que el avatar se alinee solo con el nombre y el perfil -->
+            <div class="hero__acciones">
                 <div class="hero__botones">
                     <a href="#experiencia" class="btn btn--primario">Ver experiencia</a>
                     <a href="#contacto" class="btn btn--secundario">Contacto</a>
@@ -101,12 +120,6 @@
                         <span class="stat__etiqueta">semestre de Ing. de Software</span>
                     </li>
                 </ul>
-            </div>
-            <div class="hero__foto">
-                <canvas class="foto__puntos" aria-hidden="true"></canvas>
-                <div class="foto__marco">
-                    <img src="assets/img/avatar.png" alt="Avatar de Julian Garcia" class="foto__img">
-                </div>
             </div>
         </section>
 
@@ -468,6 +481,9 @@
         <p>© 2026 Julian Andrey Garcia Quintero — Bello, Antioquia</p>
     </footer>
 
+<script src="scripts/puntos.js"></script>
+<script src="scripts/sonido.js"></script>
+<script src="scripts/bienvenida.js"></script>
 <script src="scripts/scripts.js"></script>
 </body>
 </html>
